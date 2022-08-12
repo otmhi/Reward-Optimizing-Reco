@@ -6,7 +6,7 @@ from utils.data import Dataloader
 from utils.train import xavier_init, train_step
 
 
-class FullModel(tf.Module):
+class PRRModel(tf.Module):
     def __init__(self, nb_bidding_features:int, embedding_dim:int, nb_gs_categories:int,
                  catalog_size:int, max_slate_size:int, bidding_init=None, 
                  add_position_bias_init=None, mult_position_bias_init=None, **kwargs):
@@ -49,10 +49,13 @@ class FullModel(tf.Module):
         return tf.math.log(
             tf.math.exp(product_score) + tf.math.exp(self.add_position_bias[:,:max_slate_size])
         )
-
-    def __call__(self, ind_products, ind_segments, bidding_features, **kwargs):
+    
+    @tf.function(input_signature=[tf.TensorSpec(None, tf.int32), 
+                                  tf.RaggedTensorSpec([None, None], dtype=tf.int32), 
+                                  tf.TensorSpec(None, tf.float32)])
+    def __call__(self, ind_products, ind_segments, bidding_features):
         slate_size = tf.reduce_sum(tf.where(ind_products == -1, 0, 1), axis=1, keepdims=True)
-        max_slate_size = tf.reduce_max(slate_size).numpy()
+        max_slate_size = tf.reduce_max(slate_size)
         # Compute bidding score
         bidding_score = bidding_features @ self.bidding_weight + self.bidding_bias # N x 1
         # Get grapeshot embeddings
@@ -87,12 +90,3 @@ class FullModel(tf.Module):
                 epoch_loss.append(loss)
 
             self.epoch_loss_values.append(np.sum(epoch_loss))
-
-
-class NoBiddingFullModel(FullModel):
-    def __init__(self, nb_bidding_features, **kwargs):
-        super().__init__(
-            bidding_init=np.zeros([nb_bidding_features, 1]),
-            nb_bidding_features=nb_bidding_features,
-            **kwargs
-        )

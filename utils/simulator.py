@@ -60,6 +60,8 @@ class Simulator:
         for _ in tqdm(range(nb_samples)):
             sample = self.sample_session()
             sample['products'], sample['slate_propensity'], sample['item_propensity'] = self.sample_action(**sample)
+            sample['gs'] = tf.RaggedTensor.from_tensor(sample['gs'])
+            
             logits = self.oracle_model(ind_products=sample['products'],
                                        ind_segments=sample['gs'], bidding_features=sample['bidding'])
             label = tf.random.categorical(logits, 1, dtype=tf.int32)

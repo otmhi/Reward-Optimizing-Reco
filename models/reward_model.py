@@ -50,10 +50,14 @@ class RewardModel(tf.Module):
         return tf.math.log(
             tf.math.exp(product_score) + tf.math.exp(self.add_position_bias[:,:max_slate_size])
         )
-
-    def __call__(self, ind_products, ind_segments, bidding_features, **kwargs):
+        
+        
+    @tf.function(input_signature=[tf.TensorSpec(None, tf.int32), 
+                                  tf.RaggedTensorSpec([None, None], dtype=tf.int32), 
+                                  tf.TensorSpec(None, tf.float32)])
+    def __call__(self, ind_products, ind_segments, bidding_features):
         slate_size = tf.reduce_sum(tf.where(ind_products == -1, 0, 1), axis=1, keepdims=True)
-        max_slate_size = tf.reduce_max(slate_size).numpy()
+        max_slate_size = tf.reduce_max(slate_size)
         # Compute bidding score
         bidding_score = bidding_features @ self.bidding_weight + self.bidding_bias # N x 1
         # Get grapeshot embeddings
