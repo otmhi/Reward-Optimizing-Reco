@@ -12,7 +12,7 @@ Materials for the "Reward Optimizing Recommendation using Deep Learning and Fast
 **Authors** : Aouali Imad; Heymann Benjamin; Bompaire Martin; Ait Sidi Hammou Achraf; Ivanov Sergey; Benhalloum Amine; Rohde David; Vasile Flavian; Vono Maxime; Sakhi Otmane
 
 
-- [A Scalable Probabilistic Model for Reward Optimizing Slate Recommendation
+- [Aouali et al., A Scalable Probabilistic Model for Reward Optimizing Slate Recommendation
 ](https://arxiv.org/abs/2208.06263)
 
-- [Fast Offline Policy Optimization for Large Scale Recommendation](https://arxiv.org/abs/2208.05327)
+- [Sakhi et al., Fast Offline Policy Optimization for Large Scale Recommendation](https://arxiv.org/abs/2208.05327)
