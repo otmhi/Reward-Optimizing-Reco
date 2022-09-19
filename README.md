@@ -7,7 +7,7 @@ Materials for the "Reward Optimizing Recommendation using Deep Learning and Fast
 
 - Part 2: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/otmhi/Reward-Optimizing-Reco/blob/main/Reward_Optimizing_Slate_Recommendation_with_DL_and_MIPS_Part_2.ipynb)
 
-- Part 3: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/otmhi/Reward-Optimizing-Reco/blob/main/ECML_Reward_Optimizing_Slate_Recommendation_with_DL_and_MIPS_Part_3.ipynb)
+- Part 3: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/otmhi/Reward-Optimizing-Reco/blob/main/ECML_Rewa[%E2%80%A6]izing_Slate_Recommendation_with_DL_and_MIPS_Part_3.ipynb)
 
 
 
